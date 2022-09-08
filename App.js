@@ -4,6 +4,7 @@ import { setStatusBarHidden, StatusBar } from 'expo-status-bar';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import TaxBro_pink from './assets/TaxBro_pink.png';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -127,6 +128,7 @@ function PasswordResetScreen({ navigation }) {
 function DashboardScreen({ navigation }) {
   return (
     <View>
+      <Text style={{ color: Colors.black, fontSize: 25, fontWeight: 'bold', textAlign: "center", }}>We are about redefine SA Tax!</Text>
 
     </View>
   );
