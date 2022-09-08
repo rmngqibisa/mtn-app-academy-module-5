@@ -11,9 +11,9 @@ function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Login" >
-        <Stack.Screen name="Login" component={LoginScreen} options={{headerShown: false, options}} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false, options }} />
         <Stack.Screen name="Sign Up" component={SignUpScreen} options={options.container} />
-        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={options.container} /> 
+        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={{ headerShown: false, options }} /> 
         <Stack.Screen name="Dashboard" component={DashboardScreen} options={options.container} />
         </Stack.Navigator>
     </NavigationContainer>
@@ -58,7 +58,7 @@ function LoginScreen({ navigation }) {
 function SignUpScreen({ navigation }) {
   return(
     <View style={styles.container}>
-    <Image source={TaxBro_pink} style={{ width: 150, height: 250, justifyContent: "flex-end"}} />
+    <Image source={TaxBro_pink} style={{ width: 150, height: 250}} />
     <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>First Name</Text>
     <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
       editable
@@ -96,17 +96,32 @@ function SignUpScreen({ navigation }) {
     <Text style={{ color: "#fff", fontSize: 14, position:"absolute", bottom:35 }}>Already have an account? </Text>
     <Text onPress={() => navigation.navigate("Login")}
            style={{ fontSize: 14, color: '#00F', position:"absolute", bottom:15 }} >Click here to Sign In.</Text>
-
-  </View>
-)
+    </View>
+  );
 }
 
 function PasswordResetScreen({ navigation }) {
   return (
-    <View>
-
+    <View style={styles.container}>
+      <Text style={{ height: 50 }}></Text>
+      <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Reset Password</Text>
+      <Text style={{ Maxheight:90, height:70 }}></Text>
+      <Image source={TaxBro_pink} style={{ width: 250, height: 200 }} />
+      <Text style={{ color: "#fff", fontSize: 15, textAlign: "center", fontWeight: "bold"}} >Please enter your email address to reset your Password.</Text>
+      <Text style={{ height:35 }}></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Email Address</Text>
+      <Text></Text>
+      <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30, }}
+      editable
+      maxLength={ 40 }
+      minLength={ 5 } 
+      onChangeText=""
+      />
+      <Text></Text>
+      <Button title='Submit' onPress={() => {navigation.navigate("Login")}}></Button>
+      <Text style={{ height: 150 }}></Text>
     </View>
-  )
+  );
 }
 
 function DashboardScreen({ navigation }) {
@@ -137,12 +152,6 @@ const options = StyleSheet.create({
     headerTitleStyle: {
       justifyContent: 'center'
     },
-  }
-});
-
-const inputtext = StyleSheet.create({
-  textInputStyle: {
-  color: 'black',
   }
 });
 
