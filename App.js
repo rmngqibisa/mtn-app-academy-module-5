@@ -22,7 +22,6 @@ function App() {
   
 
 function LoginScreen({ navigation }) {
-  const [text, setText] = useState('');
   return (<View style={styles.container}>
     <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Login</Text>
     <Text style={{ Maxheight:90, height:70 }}></Text>
@@ -32,8 +31,6 @@ function LoginScreen({ navigation }) {
       editable
       maxLength={ 40 }
       minLength={ 5 } 
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}
       />
     <Text></Text>
     <Text style={{ color: "#fff", fontSize: 15 }}>Password</Text>
@@ -41,8 +38,8 @@ function LoginScreen({ navigation }) {
       editable
       maxLength={ 40 } 
       secureTextEntry={true}
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}/>
+      onChangeText=""
+      />
     <Text></Text>
     <Button title='Sign In' onPress={ () => { navigation.navigate("Dashboard"); }}></Button>
     <Text></Text>
@@ -59,7 +56,6 @@ function LoginScreen({ navigation }) {
 }
 
 function SignUpScreen({ navigation }) {
-const [text, setText] = useState('');
   return(
     <View style={styles.container}>
     <Image source={TaxBro_pink} style={{ width: 150, height: 250, justifyContent: "flex-end"}} />
@@ -68,8 +64,7 @@ const [text, setText] = useState('');
       editable
       maxLength={ 40 }
       minLength={ 5 } 
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}
+      onChangeText=""
       />
       <Text></Text>
       <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Last Name</Text>
@@ -77,8 +72,7 @@ const [text, setText] = useState('');
       editable
       maxLength={ 40 }
       minLength={ 5 } 
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}
+      onChangeText=""
       />
       <Text></Text>
       <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Email Address</Text>
@@ -86,8 +80,7 @@ const [text, setText] = useState('');
       editable
       maxLength={ 40 }
       minLength={ 5 } 
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}
+      onChangeText=""
       />
       <Text></Text>
       <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Password</Text>
@@ -95,8 +88,7 @@ const [text, setText] = useState('');
       editable
       maxLength={ 40 }
       minLength={ 5 } 
-      onChangeText={newText => setText(newText)}
-      defaultValue={text}
+      onChangeText=""
       />
     <Text></Text>
     <Button title='Sign Up' onPress={() => { navigation.navigate("Login"); }} style={{ top: 0  }}></Button>  
