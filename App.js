@@ -24,9 +24,10 @@ function App() {
 function LoginScreen({ navigation }) {
   const [text, setText] = useState('');
   return (<View style={styles.container}>
-    <Text style={{ color: "#fff", fontSize: 25, height: 60.50 }}>Login</Text>
+    <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Login</Text>
+    <Text style={{ Maxheight:90, height:70 }}></Text>
     <Image source={TaxBro_pink} style={{ width: 250, height: 250 }} />
-    <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Email Address</Text>
+    <Text style={{ color: "#fff", fontSize: 15,  }}>Email Address</Text>
     <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
       editable
       maxLength={ 40 }
@@ -61,8 +62,8 @@ function SignUpScreen({ navigation }) {
 const [text, setText] = useState('');
   return(
     <View style={styles.container}>
-    <Text style={{ color: "#fff", fontSize: 25, height: 60.50 }}>Login</Text>
-    <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Email Address</Text>
+    <Image source={TaxBro_pink} style={{ width: 150, height: 250, justifyContent: "flex-end"}} />
+    <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>First Name</Text>
     <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
       editable
       maxLength={ 40 }
@@ -70,7 +71,37 @@ const [text, setText] = useState('');
       onChangeText={newText => setText(newText)}
       defaultValue={text}
       />
-          <Text style={{ color: "#fff", fontSize: 14, position:"absolute", bottom:35 }}>Already have an account? </Text>
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Last Name</Text>
+      <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
+      editable
+      maxLength={ 40 }
+      minLength={ 5 } 
+      onChangeText={newText => setText(newText)}
+      defaultValue={text}
+      />
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Email Address</Text>
+      <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30 }}
+      editable
+      maxLength={ 40 }
+      minLength={ 5 } 
+      onChangeText={newText => setText(newText)}
+      defaultValue={text}
+      />
+      <Text></Text>
+      <Text style={{ color: "#fff", fontSize: 15, Maxheight: 30.50 }}>Password</Text>
+      <TextInput style={{ width: 200, backgroundColor: "#fff", color: 'black', height: 30,  }}
+      editable
+      maxLength={ 40 }
+      minLength={ 5 } 
+      onChangeText={newText => setText(newText)}
+      defaultValue={text}
+      />
+    <Text></Text>
+    <Button title='Sign Up' onPress={() => { navigation.navigate("Login"); }} style={{ top: 0  }}></Button>  
+    <Text style={{ height:90, Maxheight:100 }}></Text>
+    <Text style={{ color: "#fff", fontSize: 14, position:"absolute", bottom:35 }}>Already have an account? </Text>
     <Text onPress={() => navigation.navigate("Login")}
            style={{ fontSize: 14, color: '#00F', position:"absolute", bottom:15 }} >Click here to Sign In.</Text>
 
@@ -100,7 +131,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF14A8',
     alignItems: 'center',
     justifyContent: 'center',
-    fontWeight: 'bold',
+  
   },
 });
 
