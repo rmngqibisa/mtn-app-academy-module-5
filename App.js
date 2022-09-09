@@ -16,7 +16,7 @@ function App() {
         <Stack.Screen name="Sign Up" component={SignUpScreen} options={options.container} />
         <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={{ headerShown: false, options }} /> 
         <Stack.Screen name="Dashboard" component={DashboardScreen} options={options.container} />
-        <Tab.Screen>name="Returns" component={Returns} options={options.container}</Tab.Screen>
+        
         </Stack.Navigator>
     </NavigationContainer>
   );
