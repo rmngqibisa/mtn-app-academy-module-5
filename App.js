@@ -129,7 +129,7 @@ function PasswordResetScreen({ navigation }) {
 function DashboardScreen({ navigation }) {
   return (
     <View>
-      <Text style={{ color: Colors.black, fontSize: 25, fontWeight: 'bold', textAlign: "center", }}>We are about redefine SA Tax!</Text>
+      <Text style={{ color: Colors.black, fontSize: 25, fontWeight: 'bold', textAlign: "center", }}>Princess, all it  - was a './s' instead of './S'</Text>
 
     </View>
   );
