@@ -14,7 +14,7 @@ function App() {
         <Stack.Navigator initialRouteName="Login" >
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false, options }} />
         <Stack.Screen name="Sign Up" component={SignUpScreen} options={options.container} />
-        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={{ headerShown: false, options }} /> 
+        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={options.container} /> 
         <Stack.Screen name="Dashboard" component={DashboardScreen} options={options.container} />
         
         </Stack.Navigator>
@@ -105,8 +105,7 @@ function SignUpScreen({ navigation }) {
 function PasswordResetScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={{ height: 50 }}></Text>
-      <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}>Reset Password</Text>
+      <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', }}></Text>
       <Text style={{ Maxheight:90, height:70 }}></Text>
       <Image source={TaxBro_pink} style={{ width: 250, height: 200 }} />
       <Text style={{ color: "#fff", fontSize: 15, textAlign: "center", fontWeight: "bold"}} >Please enter your email address to reset your Password.</Text>
