@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NavigationContainer, StackActions,  } from '@react-navigation/native';
 import { setStatusBarHidden, StatusBar } from 'expo-status-bar';
-import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, TextInput, View, Appearance, Share } from 'react-native';
 import TaxBro_pink from './assets/TaxBro_pink.png';
+import logo from './assets/logo.png';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
@@ -125,13 +126,40 @@ function PasswordResetScreen({ navigation }) {
   );
 }
 
-function DashboardScreen({ navigation }) {
-  return (
-    <View>
-      <Text style={{ color: Colors.black, fontSize: 25, fontWeight: 'bold', textAlign: "center", }}>Princess, all it  - was a './s' instead of './S'</Text>
+function DashboardScreen({ }) {
 
-    </View>
-  );
+    const onShare = async () => {
+      try {
+        const result = await Share.share({
+          message: 'Tax.<bro/> | Your Favourite Neighbourhood TaxGuru | TaxBro is here to redefine South Africa\'s tax, by bringing the power back into regular citizens hands, through providing tax advise, return calculations, return filing, assistance in case of audits, and all the questions one may have at a price that EVERYONE can afford - ohhh, sorry... did we mention that we use simple and plain language - no fancy terms apha ekhaya! TaxBro, launching soon! Powered by MTN App Academy.',
+        });
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            // shared with activity type of result.activityType
+          } else {
+            // shared
+          }
+        } else if (result.action === Share.dismissedAction) {
+          // dismissed
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    };
+    return (
+      <View style={styles.container }>
+        <Image source={logo} style={{ height: 250, width: 250, position: 'relative', }}></Image>
+        <Text></Text>
+        <Text style={{ color: "#000", fontSize: 15, textAlignVertical: 'center', textAlign: 'center' }}>Share the TaxBro 'Coming Soon' message to your friends, to tell their friends that Southa's Tax is about to be redefined and revolutionized - no affirmative repossessions necessary</Text>
+        <Text></Text>
+        <Text></Text>
+        <Text></Text>
+        <Button onPress={onShare} title="Share" />
+        <Text style={{ Maxheight:90, height: 180 }}></Text>
+        <Text></Text>
+      </View>
+    );
+  
 }
 
 const styles = StyleSheet.create({
