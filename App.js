@@ -131,7 +131,7 @@ function DashboardScreen({ }) {
     const onShare = async () => {
       try {
         const result = await Share.share({
-          message: 'Tax.<bro/> | Your Favourite Neighbourhood TaxGuru | TaxBro is here to redefine South Africa\'s tax, by bringing the power back into regular citizens hands, through providing tax advise, return calculations, return filing, assistance in case of audits, and all the questions one may have at a price that EVERYONE can afford - ohhh, sorry... did we mention that we use simple and plain language - no fancy terms apha ekhaya! TaxBro, launching soon! Powered by MTN App Academy.',
+          message: 'Tax.<bro/> \n\n| Your Favourite Neighbourhood TaxGuru | \n\nTaxBro is here to redefine South Africa\'s tax, by bringing the power back into regular citizens hands, through providing tax advise, return calculations, return filing, assistance in case of audits, and all the questions one may have at a price that EVERYONE can afford! \n\nohhh, sorry... did we mention that we use simple and plain language - no fancy terms, apha ekhaya! \n\nTaxBro, launching soon! \n\nPowered by MTN App Academy.',
         });
         if (result.action === Share.sharedAction) {
           if (result.activityType) {
