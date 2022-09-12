@@ -25,7 +25,8 @@
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.mngrom001.TaxBro"
     },
     "web": {
       "favicon": "./assets/favicon.png"
