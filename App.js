@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, NavigationContainer, StackActions,  } from '@react-navigation/native';
 import { setStatusBarHidden, StatusBar } from 'expo-status-bar';
-import { Button, Image, StyleSheet, Text, TextInput, View, Appearance, Share, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { Button, Image, StyleSheet, Text, TextInput, View, Alert, Share, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import TaxBro_pink from './assets/TaxBro_pink.png';
 import logo from './assets/logo.png';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { auth } from './firebase';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,10 +13,10 @@ function App() {
   return (
     <NavigationContainer>
         <Stack.Navigator initialRouteName="Login" >
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false, options }} />
-        <Stack.Screen name="Sign Up" component={SignUpScreen} options={options.container} />
-        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={options.container} /> 
-        <Stack.Screen name="Dashboard" component={DashboardScreen} options={options.container} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Sign Up" component={SignUpScreen} options={styles.screen} />
+        <Stack.Screen name="Password Reset" component={PasswordResetScreen} options={styles.screen} /> 
+        <Stack.Screen name="Dashboard" component={DashboardScreen} options={styles.screen} />
         
         </Stack.Navigator>
     </NavigationContainer>
@@ -24,25 +25,48 @@ function App() {
   
 
 function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSignIn = () => {
+    auth.
+      signInWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log('Logged in with: ' + user.email);
+    })
+      .catch(error => alert(error.message))
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged (user => {
+      if (user) {
+        navigation.replace('Dashboard')
+      }
+    })
+    return unsubscribe;
+  }
+)
+
   return (
-  <KeyboardAvoidingView style={styles.container} behavior='padding'>
+  <KeyboardAvoidingView style={styles.container} behavior='padding' >
     <Text style={{ color: "#fff", fontSize: 25, fontWeight: 'bold', styles}}>Login</Text>
     <Text style={{ Maxheight:90, height:70 }}></Text>
     <Image source={TaxBro_pink} style={{ width: 250, height: 220 }} />
     <View style={styles.inputContainer}>
     <TextInput style={styles.input}
       editable
-      value=''
+      value={email}
       placeholder='Email Address'
-      onChangeText={text => ''}
+      onChangeText={text => setEmail(text)}
       />
     <Text></Text>
       <TextInput style={styles.input}
       editable
+      value={password}
       placeholder='Password'
-      maxLength={ 40 } 
       secureTextEntry={true}
-      onChangeText={text => ""}
+      onChangeText={text => setPassword(text)}
       />
     </View>
 
@@ -50,7 +74,7 @@ function LoginScreen({ navigation }) {
     
     <View style={styles.buttonContainer}>
     <TouchableOpacity
-      onPress={() => {navigation.navigate("Dashboard"); }} 
+      onPress={handleSignIn} 
       style={[styles.button, styles.buttonOutline]}
       >
       <Text style={styles.buttonText}>Login</Text>
@@ -70,53 +94,72 @@ function LoginScreen({ navigation }) {
   );
 }
 
+
 function SignUpScreen({ navigation }) {
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleSignUp = () => {
+    auth.
+      createUserWithEmailAndPassword(email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+      console.log('New user: ' + user.email);
+    })
+      .catch(error => alert(error.message))
+  }
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged (user => {
+      if (user) {
+      onPress (() => navigation.replace('Login'))
+    }
+  })       
+    return unsubscribe;
+  }, []
+)
   return(
     <KeyboardAvoidingView style={styles.container}>
-    <Image source={TaxBro_pink} style={{ width: 150, height: 150}} />
+    <Image source={TaxBro_pink} style={{ width: 150, height: 200}} />
   
     <View style={styles.inputContainer}>
     <TextInput style={styles.input}
       editable
-      value=''
+      value={name}
       placeholder='First Name'
-      onChangeText={text => ''}
+      onChangeText={text => setName(text)}
       />
       <Text></Text>
       <TextInput style={styles.input}
       editable
-      value=''
+      value={surname}
       placeholder='Last Name'
-      onChangeText={text => ''}
+      onChangeText={text => setSurname(text)}
       />
       <Text></Text>
       <TextInput style={styles.input}
       editable
-      value=''
+      value={email}
       placeholder='Email Address'
-      onChangeText={text => ''}
+      onChangeText={text => setEmail(text)}
       />
       <Text></Text>
       <TextInput style={styles.input}
       editable
-      value=''
+      value={password}
       placeholder='Password'
-      onChangeText={text => ''}
+      onChangeText={text => setPassword(text)}
+      secureTextEntry={true}
       />
-      <Text></Text>
-      <TextInput style={styles.input}
-      editable
-      value=''
-      placeholder='Enter The Same Password'
-      onChangeText={text => ''}
-      />
-      </View>
+    </View>
 
     <Text></Text>
 
   <View style={styles.buttonContainer}>
     <TouchableOpacity
-      onPress={() => {navigation.navigate("Login"); }} 
+      onPress={handleSignUp} 
       style={[styles.button, styles.buttonOutline]}
       >
       <Text style={styles.buttonText}>Sign Up</Text>
@@ -153,7 +196,7 @@ function PasswordResetScreen({ navigation }) {
 
       <View style={styles.buttonContainer}>
       <TouchableOpacity
-      onPress={() => {navigation.navigate("Login"); }} 
+      onPress={() => {navigation.replace("Login"); }} 
       style={[styles.button, styles.buttonOutline]}
       >
       <Text style={styles.buttonText}>Submit</Text>
@@ -165,7 +208,15 @@ function PasswordResetScreen({ navigation }) {
   );
 }
 
-function DashboardScreen({ }) {
+function DashboardScreen({ navigation }) {
+  const handleSignOut = () => {
+    auth.
+      signOut()
+      .then (() => {
+      navigation.replace('Login')
+    })
+      .catch(error => alert(error.message))
+  }
 
     const onShare = async () => {
       try {
@@ -189,6 +240,7 @@ function DashboardScreen({ }) {
       <KeyboardAvoidingView style={styles.container }>
         <Image source={logo} style={{ height: 250, width: 250, position: 'relative', }}></Image>
         <Text></Text>
+        <Text style={{ color: "#000", fontSize: 15, textAlignVertical: 'center', textAlign: 'center', margin: 17, fontWeight: '900' }}>Hey {auth.currentUser?.email}</Text>
         <Text style={{ color: "#000", fontSize: 15, textAlignVertical: 'center', textAlign: 'center', margin: 17, fontWeight: '500' }}>Share the TaxBro 'Coming Soon' message to your friends, to tell their friends that Southa's Tax is about to be redefined and revolutionized - no affirmative repossessions necessary</Text>
         
         <View style={styles.buttonContainer}>
@@ -199,7 +251,14 @@ function DashboardScreen({ }) {
          </TouchableOpacity>
         </View>
 
-        <Text style={{ Maxheight:120, height: 90 }}></Text>
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity
+           onPress={handleSignOut} 
+           style={[styles.button, styles.buttonOutline]} >
+         <Text style={styles.buttonText}>Sign Out</Text>
+         </TouchableOpacity>
+        </View>
+        
         <Text></Text>
       </KeyboardAvoidingView>
     );
@@ -212,6 +271,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF14A8',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  screen: {
+    headerStyle: {
+      backgroundColor: '#FF14A8',
+    },
+    headerTitleAlign: 'center',
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      justifyContent: 'center'
+    },
   },
   inputContainer: {
     width: '80%'
@@ -256,17 +325,5 @@ const styles = StyleSheet.create({
 
 });
 
-const options = StyleSheet.create({
-  container: {
-    headerStyle: {
-      backgroundColor: '#FF14A8',
-    },
-    headerTitleAlign: 'center',
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      justifyContent: 'center'
-    },
-  }
-});
 
 export default App;
