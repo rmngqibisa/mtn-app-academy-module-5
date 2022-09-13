@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, NavigationContainer, StackActions,  } from '@react-navigation/native';
-import { setStatusBarHidden, StatusBar } from 'expo-status-bar';
-import { Button, Image, StyleSheet, Text, TextInput, View, Alert, Share, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+import { NavigationContainer  } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import { Image, StyleSheet, Text, TextInput, View, Share, KeyboardAvoidingView, TouchableOpacity } from 'react-native';
 import TaxBro_pink from './assets/TaxBro_pink.png';
 import logo from './assets/logo.png';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -258,7 +258,7 @@ function DashboardScreen({ navigation }) {
          <Text style={styles.buttonText}>Sign Out</Text>
          </TouchableOpacity>
         </View>
-        
+
         <Text></Text>
       </KeyboardAvoidingView>
     );
